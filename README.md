@@ -15,4 +15,4 @@ Changes will most likely not be made to this repo, after June 20th of 2023. Howe
 
 ## Credits
 
-This tutorial and SFML-based game engine was originally written in C++ by Eric Williams. Ported to C# by [Mike Magruder](https://github.com/mikemag).
+SFML-based game engine was originally written in C++ by Eric Williams. Ported to C# by [Mike Magruder](https://github.com/mikemag).
