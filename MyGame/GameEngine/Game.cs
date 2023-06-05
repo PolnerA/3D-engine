@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyGame;
 using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
@@ -43,8 +44,43 @@ namespace GameEngine
             // Only initialize once.
             if (_initialized) return;
             _initialized = true;
-
+            Mesh meshcube = new Mesh();
+            //south
+            Triangle triangle1  = new Triangle(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 1, 0));
+            Triangle triangle2  = new Triangle(new Vector3f(0, 0, 0), new Vector3f(1, 1, 0), new Vector3f(1, 0, 0));
+            //east
+            Triangle triangle3  = new Triangle(new Vector3f(1, 0, 0), new Vector3f(1, 1, 0), new Vector3f(1, 1, 1));
+            Triangle triangle4  = new Triangle(new Vector3f(1, 0, 0), new Vector3f(1, 1, 1), new Vector3f(1, 0, 1));
+            //north
+            Triangle triangle5  = new Triangle(new Vector3f(1, 0, 1), new Vector3f(1, 1, 1), new Vector3f(0, 1, 1));
+            Triangle triangle6  = new Triangle(new Vector3f(1, 0, 1), new Vector3f(0, 1, 1), new Vector3f(0, 0, 1));
+            //west
+            Triangle triangle7  = new Triangle(new Vector3f(0, 0, 1), new Vector3f(0, 1, 1), new Vector3f(0, 1, 0));
+            Triangle triangle8  = new Triangle(new Vector3f(0, 0, 1), new Vector3f(0, 1, 0), new Vector3f(0, 0, 0));
+            //top
+            Triangle triangle9  = new Triangle(new Vector3f(0, 1, 0), new Vector3f(0, 1, 1), new Vector3f(1, 1, 1));
+            Triangle triangle10 = new Triangle(new Vector3f(0, 1, 0), new Vector3f(1, 1, 1), new Vector3f(1, 1, 0));
+            //bottom
+            Triangle triangle11 = new Triangle(new Vector3f(1, 0, 1), new Vector3f(0, 0, 1), new Vector3f(0, 0, 0));
+            Triangle triangle12 = new Triangle(new Vector3f(1, 0, 1), new Vector3f(0, 0, 0), new Vector3f(1, 0, 0));
+            meshcube.AddTriangle(triangle1);
+            meshcube.AddTriangle(triangle2);
+            meshcube.AddTriangle(triangle3);
+            meshcube.AddTriangle(triangle4);
+            meshcube.AddTriangle(triangle5);
+            meshcube.AddTriangle(triangle6);
+            meshcube.AddTriangle(triangle7);
+            meshcube.AddTriangle(triangle8);
+            meshcube.AddTriangle(triangle9);
+            meshcube.AddTriangle(triangle10);
+            meshcube.AddTriangle(triangle11);
+            meshcube.AddTriangle(triangle12);
             // Create the render window.
+            float fNear = 0.1f;
+            float fFar = 1000.0f;
+            float fFov = 90.0f;
+            float fAspectRatio = (float)windowHeight() / (float)windowWidth();
+            float fFovRad = (float)1.0f / (float)Math.Tan(fFov * 0.5f / 180.0f * 3.14159f);
             _window = new RenderWindow(new VideoMode(windowWidth, windowHeight), windowTitle);
             _window.Position = new Vector2i(-11,-45);
             _window.SetMouseCursorGrabbed(true);
