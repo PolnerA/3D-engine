@@ -12,6 +12,8 @@ namespace MyGame
 {
     class Mesh:GameObject
     {
+        float fTheta=1.0f;
+
         List<Triangle> triangles= new List<Triangle>();
         public Mesh()
         {
@@ -22,9 +24,8 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            float fTheta;
             Mat4x4 matRotZ, matRotX;
-            fTheta = 1.0f * elapsed.AsMilliseconds();//+=
+            fTheta += 1.0f * elapsed.AsMilliseconds();
         }
     }
 }
