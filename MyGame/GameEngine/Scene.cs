@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using SFML.Graphics;
 using SFML.System;
-
+using GameEngine;
+using SFML.Audio;
+using SFML.Window;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 namespace GameEngine
 {
     // The Scene manages all the GameObjects currently in the game.
@@ -70,11 +79,7 @@ namespace GameEngine
             HandleCollisions();
             UpdateGameObjects(time);
             RemoveDeadGameObjects();
-            DrawBackground();
-            DrawTiles();
             DrawGameObjects();//draw background, then tiles, objects (top-bottom rendering), then the clouds ending with the ui. -AP
-            DrawClouds();
-            DrawUserInterface();
             // Draw the window as updated by the game objects.
             Game.RenderWindow.Display();
         }
@@ -127,35 +132,74 @@ namespace GameEngine
         }
 
         // This function calls draw on each of our game objects goes through each y value and goes from the top to the bottom  rendering objects as they apear. -AP
-        private void DrawGameObjects()
+
+        void DrawLine(int x1, int y1, int x2, int y2)
         {
-            for (int y = 0; y<Game.RenderWindow.Size.Y; y++)
+            int x, y, dx, dy, dx1, dy1, px, py, xe, ye, i;
+            dx = x2 - x1; dy = y2 - y1;
+            dx1 = Math.Abs(dx); dy1 = Math.Abs(dy);
+            px = 2 * dy1 - dx1; py = 2 * dx1 - dy1;
+            if (dy1 <= dx1)
             {
-                foreach (var GameObject in _gameObjects)
+                if (dx >= 0)
+                { x = x1; y = y1; xe = x2; }
+                else
+                { x = x2; y = y2; xe = x1; }
+
+                Draw(x, y);
+
+                for (i = 0; x<xe; i++)
                 {
-                    if (GameObject.GetPosition().Y==y)
+                    x = x + 1;
+                    if (px<0)
+                        px = px + 2 * dy1;
+                    else
                     {
-                        GameObject.Draw();
+                        if ((dx<0 && dy<0) || (dx>0 && dy>0)) y = y + 1; else y = y - 1;
+                        px = px + 2 * (dy1 - dx1);
                     }
+                    Draw(x, y);
+                }
+            }
+            else
+            {
+                if (dy >= 0)
+                { x = x1; y = y1; ye = y2; }
+                else
+                { x = x2; y = y2; ye = y1; }
+
+                Draw(x, y);
+
+                for (i = 0; y<ye; i++)
+                {
+                    y = y + 1;
+                    if (py <= 0)
+                        py = py + 2 * dx1;
+                    else
+                    {
+                        if ((dx<0 && dy<0) || (dx>0 && dy>0)) x = x + 1; else x = x - 1;
+                        py = py + 2 * (dx1 - dy1);
+                    }
+                    Draw(x, y);
                 }
             }
         }
+        Sprite _sprite = new Sprite();
+        private void Draw(int x, int y)
+        {
+            if (x<0&&Game.RenderWindow.Size.X<x&&y<0&&Game.RenderWindow.Size.Y<y)
+            {
+                _sprite.Texture = Game.GetTexture("../../../Resources/White Pixel.png");
+                _sprite.Position= new Vector2f(x, y);
+                Game.RenderWindow.Draw(_sprite);
+            }
+        }
         //Draws all of the other game object lists from the beggining to the end. -AP
-        private void DrawBackground()
-        { 
-            foreach (var gameobject in _background) gameobject.Draw();
-        }
-        private void DrawUserInterface()
+        public void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) 
         {
-            foreach (var gameobject in _userinterface) gameobject.Draw();
-        }
-        private void DrawClouds()
-        {
-            foreach (var gameobject in _cloud) gameobject.Draw();
-        }
-        private void DrawTiles()
-        {
-            foreach (var gameobject in _tiles) gameobject.Draw();
+            DrawLine(x1, y1, x2, y2);
+            DrawLine(x2, y2, x3, y3);
+            DrawLine(x3, y3, x1, y1);
         }
 
         // This function removes objects that indicate they are dead from the scene.

@@ -13,9 +13,20 @@ namespace MyGame
     {
         public GameScene()
         {
+            Mat4x4 matproj = new Mat4x4();
+            float fNear = 0.1f;
+            float fFar = 1000.0f;
+            float fFov = 90.0f;
+            float fAspectRatio = Game.RenderWindow.Size.Y/Game.RenderWindow.Size.X;
+            float fFovRad = (float)1.0f / (float)Math.Tan(fFov * 0.5f / 180.0f * 3.14159f);
+            matproj.AddToMatrix(fAspectRatio * fFovRad, 0, 0);//0,0
+            matproj.AddToMatrix(fFovRad, 1, 1);//1,1
+            matproj.AddToMatrix(fFar /(fFar - fNear), 2, 2);//2,2
+            matproj.AddToMatrix((-fFar * fNear) /(fFar - fNear), 3, 3);//3,2
+            matproj.AddToMatrix(1.0f, 2, 2);//2,3
+            matproj.AddToMatrix(0.0f, 3, 3);//3,3
             float[,] m4x4 = new float[,] { { } };
-            Mesh meshcube = new Mesh();
-            Mat4x4 matproj;
+            Mesh meshcube = new Mesh(matproj);
             //south
             Triangle triangle1 = new Triangle(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 1, 0));
             Triangle triangle2 = new Triangle(new Vector3f(0, 0, 0), new Vector3f(1, 1, 0), new Vector3f(1, 0, 0));
@@ -46,17 +57,7 @@ namespace MyGame
             meshcube.AddTriangle(triangle10);
             meshcube.AddTriangle(triangle11);
             meshcube.AddTriangle(triangle12);
-            float fNear = 0.1f;
-            float fFar = 1000.0f;
-            float fFov = 90.0f;
-            float fAspectRatio = Game.RenderWindow.Size.Y/Game.RenderWindow.Size.X;
-            float fFovRad = (float)1.0f / (float)Math.Tan(fFov * 0.5f / 180.0f * 3.14159f);
-            matproj[0,0] = fAspectRatio * fFovRad;
-            matproj[1,1] = fFovRad;
-            matproj[2,2] = fFar / (fFar - fNear);
-            matproj[3,2] = (-fFar * fNear) / (fFar - fNear);
-            matproj[2,3] = 1.0f;
-            matproj[3,3] = 0.0f;
+            
         }
     }
 }
