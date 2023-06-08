@@ -1,8 +1,6 @@
-# Isometric Game with the Williams Game Engine
+# 3d Game demo with the Williams Game Engine
 
-This repo is a simple game, or rather a demonstration of isometric design within a 2d game engine (Williams game engine) Made by Adam Polner in Michael T. Miyoshi's intro to programming class.
-some changes have been made to the game engine, most notably the different lists to render things first or last. 
-Everything is commented and changes in the game engine are commented with -AP.
+This repository is a transformation of the Williams Game engine from a simple 2d based game engine to one which has 3d graphics, this is done with multiple matrices the main one matproj is used to change the vectors of 3 points to 2d coordinates, the project can still be heavily optimized and that's probably what I'll do with it in the future.
 
 ## Additional details
 
