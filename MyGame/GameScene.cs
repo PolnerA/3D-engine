@@ -14,18 +14,17 @@ namespace MyGame
         public GameScene()
         {
             Mat4x4 matproj = new Mat4x4();
-            float fNear = 0.1f;
-            float fFar = 1000.0f;
+            float fNear = 0.1f;//calculate and hardcode the projection matrix 
+            float fFar = 1000.0f;//then change it to run at the start
             float fFov = 90.0f;
             float fAspectRatio = Game.RenderWindow.Size.Y/Game.RenderWindow.Size.X;
             float fFovRad = (float)1.0f / (float)Math.Tan(fFov * 0.5f / 180.0f * 3.14159f);
-            matproj.AddToMatrix(fAspectRatio * fFovRad, 0, 0);//0,0
-            matproj.AddToMatrix(fFovRad, 1, 1);//1,1
+            matproj.m4x4[0][0]=fAspectRatio * fFovRad;
+            matproj.m4x4[1][1] = fFovRad;//1,1
             matproj.AddToMatrix(fFar /(fFar - fNear), 2, 2);//2,2
-            matproj.AddToMatrix((-fFar * fNear) /(fFar - fNear), 3, 3);//3,2
+            matproj.AddToMatrix((-fFar * fNear) /(fFar - fNear), 3, 2);//3,2
             matproj.AddToMatrix(1.0f, 2, 2);//2,3
             matproj.AddToMatrix(0.0f, 3, 3);//3,3
-            float[,] m4x4 = new float[,] { { } };
             Mesh meshcube = new Mesh(matproj);
             //south
             Triangle triangle1 = new Triangle(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 1, 0));

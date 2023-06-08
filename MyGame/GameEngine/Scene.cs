@@ -91,7 +91,7 @@ namespace GameEngine
         public void AddToList(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             point1s.Add(new Vector2f(x1, y1));
-            point2s.Add(new Vector2f(x2, y2));
+            point2s.Add(new Vector2f(x2, y2));//same points are being added?
             point3s.Add(new Vector2f(x3, y3));
         }
         public void ClearList()
