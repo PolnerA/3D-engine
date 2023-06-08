@@ -75,7 +75,8 @@ namespace GameEngine
             // Clear the window.
 
             // Go through our normal sequence of game loop stuff.
-            DrawLine(0, 0, 100, 100);//drawline draw and draw triangle work from here
+            DrawTriangle(100, 100, 200, 100, 100, 200);
+            
             // Handle any keyboard, mouse events, etc. for our game window.
             Game.RenderWindow.DispatchEvents();
             HandleCollisions();
@@ -96,10 +97,12 @@ namespace GameEngine
         }
         public void ClearList()
         {
+            /*
             point1s.Clear();
             point2s.Clear();
             point3s.Clear();
             Game.RenderWindow.Clear();
+            */
         }
         // This method lets game objects respond to collisions.
         private void HandleCollisions()//handle collisions is only for _gameObjects and _cloud-AP

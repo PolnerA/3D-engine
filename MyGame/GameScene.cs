@@ -13,18 +13,20 @@ namespace MyGame
     {
         public GameScene()
         {
+            //projection matrix is good
             Mat4x4 matproj = new Mat4x4();
-            float fNear = 0.1f;//calculate and hardcode the projection matrix 
-            float fFar = 1000.0f;//then change it to run at the start
+            float fNear = 0.1f; 
+            float fFar = 1000.0f;
             float fFov = 90.0f;
-            float fAspectRatio = Game.RenderWindow.Size.Y/Game.RenderWindow.Size.X;
+            float fAspectRatio = (float)Game.RenderWindow.Size.Y/(float)Game.RenderWindow.Size.X;
             float fFovRad = (float)1.0f / (float)Math.Tan(fFov * 0.5f / 180.0f * 3.14159f);
-            matproj.m4x4[0][0]=fAspectRatio * fFovRad;
-            matproj.m4x4[1][1] = fFovRad;//1,1
-            matproj.AddToMatrix(fFar /(fFar - fNear), 2, 2);//2,2
-            matproj.AddToMatrix((-fFar * fNear) /(fFar - fNear), 3, 2);//3,2
-            matproj.AddToMatrix(1.0f, 2, 2);//2,3
-            matproj.AddToMatrix(0.0f, 3, 3);//3,3
+            matproj.m4x4[0][0]=fAspectRatio * fFovRad; //0,0 = 0.5629
+            matproj.m4x4[1][1] = fFovRad;//1,1 = 1.00003
+            matproj.m4x4[2][2]=fFar /(fFar - fNear);//2,2 =
+            matproj.m4x4[3][2]=(-fFar * fNear) /(fFar - fNear);//3,2 = -0.10001000100010001000100010001
+            matproj.m4x4[2][3]= 1.0f;//2,3 = 1
+            matproj.m4x4[3][3]= 0.0f;//3,3 = 0
+            //Triangles are good
             Mesh meshcube = new Mesh(matproj);
             //south
             Triangle triangle1 = new Triangle(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 1, 0));
