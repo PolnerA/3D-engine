@@ -29,6 +29,10 @@ namespace GameEngine
         //_cloud gives game objects in between the main game object and the UI-AP
         private readonly List<GameObject> _userinterface = new List<GameObject>();
         //User interface allows to render certain game objects to render last to look part of a cohesive UI-AP
+        private readonly List<Vector2f> point1s = new List<Vector2f>();
+        private readonly List<Vector2f> point2s = new List<Vector2f>();
+        private readonly List<Vector2f> point3s = new List<Vector2f>();
+
         // Puts a GameObject into the scene.
         public void AddGameObject(GameObject gameObject)
         {
@@ -69,21 +73,34 @@ namespace GameEngine
         public void Update(Time time)
         {
             // Clear the window.
-            Game.RenderWindow.Clear();
 
             // Go through our normal sequence of game loop stuff.
-
+            DrawLine(0, 0, 100, 100);//drawline draw and draw triangle work from here
             // Handle any keyboard, mouse events, etc. for our game window.
             Game.RenderWindow.DispatchEvents();
-
             HandleCollisions();
             UpdateGameObjects(time);
+            for (int i = 0; i<point1s.Count; i++)
+            {
+                DrawTriangle((int)point1s[i].X, (int)point1s[i].Y, (int)point2s[i].X, (int)point2s[i].Y, (int)point3s[i].X, (int)point3s[i].Y);
+            }
             RemoveDeadGameObjects();
-            DrawGameObjects();//draw background, then tiles, objects (top-bottom rendering), then the clouds ending with the ui. -AP
             // Draw the window as updated by the game objects.
             Game.RenderWindow.Display();
         }
-
+        public void AddToList(int x1, int y1, int x2, int y2, int x3, int y3)
+        {
+            point1s.Add(new Vector2f(x1, y1));
+            point2s.Add(new Vector2f(x2, y2));
+            point3s.Add(new Vector2f(x3, y3));
+        }
+        public void ClearList()
+        {
+            point1s.Clear();
+            point2s.Clear();
+            point3s.Clear();
+            Game.RenderWindow.Clear();
+        }
         // This method lets game objects respond to collisions.
         private void HandleCollisions()//handle collisions is only for _gameObjects and _cloud-AP
         {
@@ -187,12 +204,11 @@ namespace GameEngine
         Sprite _sprite = new Sprite();
         private void Draw(int x, int y)
         {
-            if (x<0&&Game.RenderWindow.Size.X<x&&y<0&&Game.RenderWindow.Size.Y<y)
-            {
-                _sprite.Texture = Game.GetTexture("../../../Resources/White Pixel.png");
-                _sprite.Position= new Vector2f(x, y);
-                Game.RenderWindow.Draw(_sprite);
-            }
+
+           _sprite.Texture = Game.GetTexture("../../../Resources/White Pixel.png");
+           _sprite.Position= new Vector2f(x, y);
+           Game.RenderWindow.Draw(_sprite);
+            Game.RenderWindow.Display();
         }
         //Draws all of the other game object lists from the beggining to the end. -AP
         public void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) 

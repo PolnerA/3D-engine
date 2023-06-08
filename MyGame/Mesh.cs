@@ -44,12 +44,16 @@ namespace MyGame
             matRotX.AddToMatrix((float)-Math.Sin(fTheta * 0.5f), 2, 2);
             matRotX.AddToMatrix((float)Math.Cos(fTheta * 0.5f), 2, 2);
             matRotX.AddToMatrix(1, 3, 3);
-            
             for (int i=0; i<triangles.Count;i++)
             {
-                Triangle triProjected = new Triangle(); Triangle triTranslated = new Triangle(); Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX= new Triangle();
+                Triangle triprojected = new Triangle();
+                matProj.MultiplyMatrixVector(triangles[i].a, triprojected.a, matProj);
+                matProj.MultiplyMatrixVector(triangles[i].b, triprojected.b, matProj);
+                matProj.MultiplyMatrixVector(triangles[i].c, triprojected.c, matProj);
+                Game.CurrentScene.AddToList((int)triprojected.a.X, (int)triprojected.a.Y, (int)triprojected.b.X, (int)triprojected.b.Y, (int)triprojected.c.X, (int)triprojected.c.Y);
+                /*Triangle triProjected = new Triangle(); Triangle triTranslated; Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX= new Triangle();
 
-                // Rotate in Z-Axis
+               // Rotate in Z-Axis
                 matRotZ.MultiplyMatrixVector(triangles[i].a, triRotatedZ.a, matRotZ);
                 matRotZ.MultiplyMatrixVector(triangles[i].b, triRotatedZ.b, matRotZ);
                 matRotZ.MultiplyMatrixVector(triangles[i].c, triRotatedZ.c, matRotZ);
@@ -83,8 +87,10 @@ namespace MyGame
 
                 // Rasterize triangle
                 Game.CurrentScene.DrawTriangle((int)triProjected.a.X, (int)triProjected.a.Y, (int)triProjected.b.X, (int)triProjected.b.Y, (int)triProjected.c.X, (int)triProjected.c.Y);
-
+                */
             }
+            GameScene scene = (GameScene)Game.CurrentScene;
+            scene.ClearList();
         }
     }
 }

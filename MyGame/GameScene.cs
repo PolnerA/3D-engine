@@ -57,7 +57,7 @@ namespace MyGame
             meshcube.AddTriangle(triangle10);
             meshcube.AddTriangle(triangle11);
             meshcube.AddTriangle(triangle12);
-            
+            AddGameObject(meshcube);
         }
     }
 }
