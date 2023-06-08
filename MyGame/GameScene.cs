@@ -22,10 +22,11 @@ namespace MyGame
             float fFovRad = (float)1.0f / (float)Math.Tan(fFov * 0.5f / 180.0f * 3.14159f);
             matproj.m4x4[0][0]=fAspectRatio * fFovRad; //0,0 = 0.5629
             matproj.m4x4[1][1] = fFovRad;//1,1 = 1.00003
-            matproj.m4x4[2][2]=fFar /(fFar - fNear);//2,2 =
+            matproj.m4x4[2][2]=fFar /(fFar - fNear);//2,2 =1.0001
             matproj.m4x4[3][2]=(-fFar * fNear) /(fFar - fNear);//3,2 = -0.10001000100010001000100010001
             matproj.m4x4[2][3]= 1.0f;//2,3 = 1
             matproj.m4x4[3][3]= 0.0f;//3,3 = 0
+            
             //Triangles are good
             Mesh meshcube = new Mesh(matproj);
             //south

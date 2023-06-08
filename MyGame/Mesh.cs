@@ -23,6 +23,7 @@ namespace MyGame
         public void AddTriangle(Triangle triangle)
         {
             triangles.Add(triangle);
+
         }
         public override void Update(Time elapsed)
         {
@@ -31,7 +32,6 @@ namespace MyGame
             fTheta += 1.0f * elapsed.AsSeconds();
             // Rotation Z
             matRotZ.m4x4[0][0]=(float)Math.Cos(fTheta);
-            Console.WriteLine(matRotZ.m4x4[0][0]);//assigns to the matrix
             matRotZ.m4x4[0][1] =(float)Math.Sin(fTheta);
             matRotZ.m4x4[1][0] =(float)-Math.Sin(fTheta);
             matRotZ.m4x4[1][1] =(float)Math.Cos(fTheta);
@@ -40,20 +40,23 @@ namespace MyGame
             // Rotation X
             matRotX.m4x4[0][0] = 1;
             matRotX.m4x4[1][1] =(float)Math.Cos(fTheta * 0.5f);
-            matRotX.m4x4[1][1] =(float)Math.Sin(fTheta * 0.5f);
-            matRotX.m4x4[2][2] =(float)-Math.Sin(fTheta * 0.5f);
+            matRotX.m4x4[1][2] =(float)Math.Sin(fTheta * 0.5f);
+            matRotX.m4x4[2][1] =(float)-Math.Sin(fTheta * 0.5f);
             matRotX.m4x4[2][2] =(float)Math.Cos(fTheta * 0.5f);
             matRotX.m4x4[3][3] = 1;
             for (int i=0; i<triangles.Count;i++)
-            {             
+            {             //Problem area ||
+                //                       \/
                 Triangle triProjected = new Triangle(); Triangle triTranslated; Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX= new Triangle();
 
-               // Rotate in Z-Axis
+                // Rotate in Z-Axis
+                Console.WriteLine("First Z Axis:");
                 matRotZ.MultiplyMatrixVector(triangles[i].a, triRotatedZ.a);
-               matRotZ.MultiplyMatrixVector(triangles[i].b, triRotatedZ.b);
+               matRotZ.MultiplyMatrixVector(triangles[i].b, triRotatedZ.b);//matrix multiplication for rotation leaves 0 values
                 matRotZ.MultiplyMatrixVector(triangles[i].c, triRotatedZ.c);
-
+                //output for mat rot z isn't recorded, keeps the input 0 for the second.
                 // Rotate in X-Axis
+                Console.WriteLine("Second X Axis:");
                 matRotX.MultiplyMatrixVector(triRotatedZ.a, triRotatedZX.a);
                 matRotX.MultiplyMatrixVector(triRotatedZ.b, triRotatedZX.b);
                 matRotX.MultiplyMatrixVector(triRotatedZ.c, triRotatedZX.c);
@@ -64,6 +67,7 @@ namespace MyGame
                 triTranslated.c.Z = triRotatedZX.c.Z + 3.0f;
 
                 // Project triangles from 3D --> 2D
+                Console.WriteLine("Thrid projection:");
                 matProj.MultiplyMatrixVector(triTranslated.a, triProjected.a);
                 matProj.MultiplyMatrixVector(triTranslated.b, triProjected.b);
                 matProj.MultiplyMatrixVector(triTranslated.c, triProjected.c);

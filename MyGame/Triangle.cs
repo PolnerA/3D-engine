@@ -9,7 +9,6 @@ namespace MyGame
 {
     class Triangle
     {
-        //flawless Coding certainty 70%
         public Vector3f a;
         public Vector3f b;
         public Vector3f c;

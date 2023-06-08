@@ -75,7 +75,6 @@ namespace GameEngine
             // Clear the window.
 
             // Go through our normal sequence of game loop stuff.
-            DrawTriangle(100, 100, 200, 100, 100, 200);
             
             // Handle any keyboard, mouse events, etc. for our game window.
             Game.RenderWindow.DispatchEvents();
@@ -94,6 +93,8 @@ namespace GameEngine
             point1s.Add(new Vector2f(x1, y1));
             point2s.Add(new Vector2f(x2, y2));//same points are being added?
             point3s.Add(new Vector2f(x3, y3));
+            //stays at 960 540
+
         }
         public void ClearList()
         {
