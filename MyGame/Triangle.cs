@@ -9,6 +9,7 @@ namespace MyGame
 {
     class Triangle
     {
+        //flawless Coding certainty 70%
         public Vector3f a;
         public Vector3f b;
         public Vector3f c;
@@ -20,8 +21,5 @@ namespace MyGame
         {
             a= new Vector3f(0, 0, 0); b=new Vector3f(0, 0, 0); c=new Vector3f(0,0,0);
         }
-        public void ChangeA(Vector3f A) { a=A; }
-        public void ChangeB(Vector3f B) { b=B; }
-        public void ChangeC(Vector3f C) { c=C; }
     }
 }

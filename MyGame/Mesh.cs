@@ -33,7 +33,7 @@ namespace MyGame
             Console.WriteLine("Cos(T):"+Math.Cos(fTheta));
             // Rotation Z
             matRotZ.AddToMatrix((float)Math.Cos(fTheta),0,0);
-            Console.WriteLine(matRotZ.m4x4[0][0]);
+            Console.WriteLine(matRotZ.m4x4[0][0]);//assigns to the matrix
             matRotZ.AddToMatrix((float)Math.Sin(fTheta),0,1);
             matRotZ.AddToMatrix((float)-Math.Sin(fTheta),1,0);
             matRotZ.AddToMatrix((float)Math.Cos(fTheta),1,1);
