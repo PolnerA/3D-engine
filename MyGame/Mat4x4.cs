@@ -10,7 +10,7 @@ namespace MyGame
 {
     class Mat4x4
     {
-        List<float> list = new List<float>(4);
+       
         public List<List<float>> m4x4 = new List<List<float>>() { new List<float> { 0,0,0,0},
                                                            new List<float> { 0,0,0,0},
                                                            new List<float> { 0,0,0,0},
