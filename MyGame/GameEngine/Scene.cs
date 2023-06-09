@@ -73,7 +73,7 @@ namespace GameEngine
         public void Update(Time time)
         {
             // Clear the window.
-
+            Game.RenderWindow.Clear();
             // Go through our normal sequence of game loop stuff.
             
             // Handle any keyboard, mouse events, etc. for our game window.
@@ -95,13 +95,10 @@ namespace GameEngine
             point3s.Add(new Vector2f(x3, y3));
         }
         public void ClearList()
-        {
-            /*
+        {            
             point1s.Clear();
             point2s.Clear();
             point3s.Clear();
-            Game.RenderWindow.Clear();
-            */
         }
         // This method lets game objects respond to collisions.
         private void HandleCollisions()//handle collisions is only for _gameObjects and _cloud-AP
@@ -215,6 +212,8 @@ namespace GameEngine
         //Draws all of the other game object lists from the beggining to the end. -AP
         public void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) 
         {
+            VertexArray lines = new VertexArray((PrimitiveType)3,3);
+            lines[0].Position = new Vector2f(x1, y1);
             DrawLine(x1, y1, x2, y2);
             DrawLine(x2, y2, x3, y3);
             DrawLine(x3, y3, x1, y1);
