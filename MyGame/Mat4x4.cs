@@ -15,8 +15,9 @@ namespace MyGame
                                                            new List<float> { 0,0,0,0},
                                                            new List<float> { 0,0,0,0},
                                                            new List<float> { 0,0,0,0} };
-        public void MultiplyMatrixVector(Vector3f input, Vector3f output)
+        public Vector3f MultiplyMatrixVector(Vector3f input)
         {
+            Vector3f output = new Vector3f();
             output.X = (input.X * m4x4[0][0]) +( input.Y * m4x4[1][0]) + (input.Z * m4x4[2][0]) + m4x4[3][0];
             output.Y = (input.X * m4x4[0][1]) +( input.Y * m4x4[1][1]) + (input.Z * m4x4[2][1]) + m4x4[3][1];
             output.Z = (input.X * m4x4[0][2]) +( input.Y * m4x4[1][2]) + (input.Z * m4x4[2][2]) + m4x4[3][2];
@@ -26,8 +27,7 @@ namespace MyGame
             {
                 output.X /= w; output.Y /= w; output.Z /= w;
             }
-            Console.WriteLine("I XYZ:"+input.X+" "+input.Y+" "+input.Z);
-            Console.WriteLine("O XYZ:"+output.X+" "+output.Y+" "+output.Z);
+            return output;
         }
     }
 }

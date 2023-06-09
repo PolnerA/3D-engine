@@ -93,8 +93,6 @@ namespace GameEngine
             point1s.Add(new Vector2f(x1, y1));
             point2s.Add(new Vector2f(x2, y2));//same points are being added?
             point3s.Add(new Vector2f(x3, y3));
-            //stays at 960 540
-
         }
         public void ClearList()
         {

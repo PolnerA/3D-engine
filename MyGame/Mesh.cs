@@ -50,16 +50,14 @@ namespace MyGame
                 Triangle triProjected = new Triangle(); Triangle triTranslated; Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX= new Triangle();
 
                 // Rotate in Z-Axis
-                Console.WriteLine("First Z Axis:");
-                matRotZ.MultiplyMatrixVector(triangles[i].a, triRotatedZ.a);
-               matRotZ.MultiplyMatrixVector(triangles[i].b, triRotatedZ.b);//matrix multiplication for rotation leaves 0 values
-                matRotZ.MultiplyMatrixVector(triangles[i].c, triRotatedZ.c);
+                triRotatedZ.a = matRotZ.MultiplyMatrixVector(triangles[i].a);
+                triRotatedZ.b = matRotZ.MultiplyMatrixVector(triangles[i].b);//matrix multiplication for rotation leaves 0 values
+                triRotatedZ.c = matRotZ.MultiplyMatrixVector(triangles[i].c);
                 //output for mat rot z isn't recorded, keeps the input 0 for the second.
                 // Rotate in X-Axis
-                Console.WriteLine("Second X Axis:");
-                matRotX.MultiplyMatrixVector(triRotatedZ.a, triRotatedZX.a);
-                matRotX.MultiplyMatrixVector(triRotatedZ.b, triRotatedZX.b);
-                matRotX.MultiplyMatrixVector(triRotatedZ.c, triRotatedZX.c);
+                triRotatedZX.a = matRotX.MultiplyMatrixVector(triRotatedZ.a);
+                triRotatedZX.b = matRotX.MultiplyMatrixVector(triRotatedZ.b);
+                triRotatedZX.c = matRotX.MultiplyMatrixVector(triRotatedZ.c);
                 // Offset into the screen
                 triTranslated = triRotatedZX;
                 triTranslated.a.Z = triRotatedZX.a.Z + 3.0f;
@@ -67,10 +65,9 @@ namespace MyGame
                 triTranslated.c.Z = triRotatedZX.c.Z + 3.0f;
 
                 // Project triangles from 3D --> 2D
-                Console.WriteLine("Thrid projection:");
-                matProj.MultiplyMatrixVector(triTranslated.a, triProjected.a);
-                matProj.MultiplyMatrixVector(triTranslated.b, triProjected.b);
-                matProj.MultiplyMatrixVector(triTranslated.c, triProjected.c);
+                triProjected.a = matProj.MultiplyMatrixVector(triTranslated.a);
+                triProjected.b = matProj.MultiplyMatrixVector(triTranslated.b);
+                triProjected.c = matProj.MultiplyMatrixVector(triTranslated.c);
                 
                 // Scale into view
                 triProjected.a.X += 1.0f; triProjected.a.Y += 1.0f;
