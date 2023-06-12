@@ -27,7 +27,7 @@ namespace MyGame
             matproj.m4x4[2][3]= 1.0f;//2,3 = 1
             matproj.m4x4[3][3]= 0.0f;//3,3 = 0
             
-            //Triangles are good
+            //Triangles for 3d graphical rendering
             Mesh meshcube = new Mesh(matproj);
             //south
             Triangle triangle1 = new Triangle(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 1, 0));
@@ -60,6 +60,26 @@ namespace MyGame
             meshcube.AddTriangle(triangle11);
             meshcube.AddTriangle(triangle12);
             AddGameObject(meshcube);
+            //pyramid mesh
+            Mesh meshPyramid = new Mesh(matproj);
+            //bottom
+            Triangle ptriangle1 = new Triangle(new Vector3f(1,0,1),new Vector3f(0,0,1), new Vector3f(0,0,0));
+            Triangle ptriangle2 = new Triangle(new Vector3f(1, 0, 1), new Vector3f(0, 0, 0), new Vector3f(1, 0, 0));
+            //south face
+            Triangle ptriangle3 = new Triangle(new Vector3f(0.5f, 1f, 0.5f), new Vector3f(0, 0, 0), new Vector3f(1, 0, 0));
+            //west face
+            Triangle ptriangle4 = new Triangle(new Vector3f(0.5f, 1f, 0.5f), new Vector3f(0, 0, 0), new Vector3f(0, 0, 1));
+            //south face
+            Triangle ptriangle5 = new Triangle(new Vector3f(0.5f, 1f, 0.5f), new Vector3f(0, 0, 1), new Vector3f(1, 0, 1));
+            //east face
+            Triangle ptriangle6 = new Triangle(new Vector3f(0.5f, 1f, 0.5f), new Vector3f(1, 0, 1), new Vector3f(1, 0, 0));
+            meshPyramid.AddTriangle(ptriangle1);
+            meshPyramid.AddTriangle(ptriangle2);
+            meshPyramid.AddTriangle(ptriangle3);
+            meshPyramid.AddTriangle(ptriangle4);
+            meshPyramid.AddTriangle(ptriangle5);
+            meshPyramid.AddTriangle(ptriangle6);
+            //AddGameObject(meshPyramid); //add it as game object to see it (mesh draws it self when game objects update)
         }
     }
 }
