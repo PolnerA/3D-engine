@@ -13,6 +13,7 @@ namespace MyGame
     {
         public GameScene()
         {
+            Random rng = new Random();
             //projection matrix is good
             Mat4x4 matproj = new Mat4x4();
             float fNear = 0.1f; 
@@ -61,6 +62,7 @@ namespace MyGame
             meshcube.AddTriangle(triangle12);
             AddGameObject(meshcube);
             //pyramid mesh
+
             Mesh meshPyramid = new Mesh(matproj);
             //bottom
             Triangle ptriangle1 = new Triangle(new Vector3f(1,0,1),new Vector3f(0,0,1), new Vector3f(0,0,0));
@@ -80,6 +82,16 @@ namespace MyGame
             meshPyramid.AddTriangle(ptriangle5);
             meshPyramid.AddTriangle(ptriangle6);
             //AddGameObject(meshPyramid); //add it as game object to see it (mesh draws it self when game objects update)
+
+            //random mesh
+
+            Mesh RandomShape = new Mesh(matproj);
+            for (int i = 0; i<rng.Next(10)+1; i++)
+            {
+                Triangle randomtriangle = new Triangle(new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()),new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()), new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()));
+                RandomShape.AddTriangle(randomtriangle);
+            }
+            //AddGameObject(RandomShape);
         }
     }
 }
