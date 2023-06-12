@@ -13,4 +13,4 @@ for example you can make a rectangle or a pyramid, This is just a simple demonst
 
 SFML-based game engine was originally written in C++ by Eric Williams. Ported to C# by [Mike Magruder](https://github.com/mikemag). 
 Code for the 3d Demo was mostly from [this 3d engine demo](https://github.com/OneLoneCoder/Javidx9/blob/master/ConsoleGameEngine/BiggerProjects/Engine3D/OneLoneCoder_olcEngine3D_Part1.cpp)
-Which I ported from C++ to C#.
+This repo is almost the same ported from C++ to C#.
