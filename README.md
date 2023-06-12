@@ -7,8 +7,7 @@ it can be used to create functional 3d graphics using SFML and the majority of t
 ## Additional details
 
 You can change the shape that's desplayed by adding new triangles for a different mesh that's not a cube, 
-for example you can make a rectangle or a pyramid, This is just a simple demonstration of 3d graphics and how they work
-
+for example you can make a rectangle or a pyramid, This is just a simple demonstration of 3d graphics and how they work.
 
 ## Credits
 
