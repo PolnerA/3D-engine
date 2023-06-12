@@ -81,11 +81,9 @@ namespace MyGame
                 triProjected.c.Y *= 0.5f * Game.RenderWindow.Size.Y;
 
                 // Rasterize triangle
-                Game.CurrentScene.AddToList((int)triProjected.a.X, (int)triProjected.a.Y, (int)triProjected.b.X, (int)triProjected.b.Y, (int)triProjected.c.X, (int)triProjected.c.Y);
+                Game.CurrentScene.DrawTriangle((int)triProjected.a.X, (int)triProjected.a.Y, (int)triProjected.b.X, (int)triProjected.b.Y, (int)triProjected.c.X, (int)triProjected.c.Y);
                 //only one point scaled into view
             }
-            GameScene scene = (GameScene)Game.CurrentScene;
-            scene.ClearList();
         }
     }
 }
