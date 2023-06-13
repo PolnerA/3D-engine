@@ -7,7 +7,10 @@ it can be used to create functional 3d graphics using SFML and the majority of t
 ## Additional details
 
 You can change the shape that's desplayed by adding new triangles for a different mesh that's not a cube, 
-for example you can make a rectangle or a pyramid, This is just a simple demonstration of 3d graphics and how they work.
+for example you can make a rectangle or a pyramid, This is just a simple demonstration of 3d graphics and how they work. 
+It can be presented a lot simpler, but all you need to put something 3d is to create a mesh, populate it with triangles, 
+and add it as a gameobject. This currently will cause the gameobject to rotate to showcase the 3d graphics as that's in the mesh class.
+And if you want the different 3d objects to have different properties simply create a new class which inherits the mesh class, and modify it to your hearts content.
 
 ## Credits
 
