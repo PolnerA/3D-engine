@@ -101,7 +101,7 @@ namespace GameEngine
             vertex1.Position = new Vector2f(x1, y1);
             //first vertex position is at point 1
 
-            vertex1.Color = Color.White;
+            vertex1.Color = Color.Red;
             //the color of the vertex is white
             
             Vertex vertex2 = new Vertex();
@@ -110,7 +110,7 @@ namespace GameEngine
             vertex2.Position = new Vector2f(x2, y2);
             //vertex is set to the second point
             
-            vertex2.Color = Color.White;
+            vertex2.Color = Color.Red;
             //vertex's color is white
             
             Vertex vertex3 = new Vertex();
@@ -119,7 +119,7 @@ namespace GameEngine
             vertex3.Position = new Vector2f(x3, y3);
             //vertex position is set to the 3rd point
             
-            vertex3.Color = Color.White;
+            vertex3.Color = Color.Red;
             //vertex color is white
             
             //draw line between x1 y1 x2 y2

@@ -12,7 +12,7 @@ namespace MyGame
         private const string WindowTitle = "Explore";
 
         private static void Main(string[] args)
-        {//organize code (figure out what it has to do)
+        {
             // Initialize the game.
             Game.Initialize(WindowWidth, WindowHeight, WindowTitle);
 
