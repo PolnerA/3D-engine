@@ -10,7 +10,8 @@ You can change the shape that's desplayed by adding new triangles for a differen
 for example you can make a rectangle or a pyramid, This is just a simple demonstration of 3d graphics and how they work. 
 It can be presented a lot simpler, but all you need to put something 3d is to create a mesh, populate it with triangles, 
 and add it as a gameobject. This currently will cause the gameobject to rotate to showcase the 3d graphics as that's in the mesh class.
-And if you want the different 3d objects to have different properties simply create a new class which inherits the mesh class, and modify it to your hearts content.
+And if you want the different 3d objects to have different properties simply create a new class which has the same properties as the mesh class, and modify it to your hearts content.
+Just remember to multiply the points by the projection matrix (matproj) to be able to have the points shown as 2d.
 
 ## Credits
 
