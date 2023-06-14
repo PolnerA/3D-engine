@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using SFML.Audio;
+﻿using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using System;
+using System.Collections.Generic;
 
 namespace GameEngine
 {
@@ -43,14 +43,14 @@ namespace GameEngine
             // Only initialize once.
             if (_initialized) return;
             _initialized = true;
-           
+
             // Create the render window.
             _window = new RenderWindow(new VideoMode(windowWidth, windowHeight), windowTitle);
             _window.Position = new Vector2i(-11, -45);
             _window.SetMouseCursorGrabbed(true);
             _window.SetFramerateLimit(FramesPerSecond);
-            
-            
+
+
 
             // Add a method to be called whenever the "Closed" event fires.
             _window.Closed += ClosedEventHandler;

@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
-using GameEngine;
-using SFML.Audio;
-using SFML.Window;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 namespace GameEngine
 {
     // The Scene manages all the GameObjects currently in the game.
@@ -88,7 +77,7 @@ namespace GameEngine
         }
 
         // This has a parameter for 3 points, drawing a line between 1 & 2, 2 & 3, 3 & 1, to draw a triangle between the three points
-        public void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) 
+        public void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3)
         {
             //Set Up the 3 points
             Vertex vertex1 = new Vertex();
@@ -99,25 +88,25 @@ namespace GameEngine
 
             vertex1.Color = Color.Red;
             //the color of the vertex is red
-            
+
             Vertex vertex2 = new Vertex();
             //second vertex
-            
+
             vertex2.Position = new Vector2f(x2, y2);
             //vertex is set to the second point
-            
+
             vertex2.Color = Color.Red;
             //vertex's color is red
-            
+
             Vertex vertex3 = new Vertex();
             //3rd vertex
-            
+
             vertex3.Position = new Vector2f(x3, y3);
             //vertex position is set to the 3rd point
-            
+
             vertex3.Color = Color.Red;
             //vertex color is red
-            
+
             //draw line between x1 y1 x2 y2
             VertexArray lines1 = new VertexArray((PrimitiveType)2, 2);//creates a vertex array with two vertices, type line.
             lines1[0] = vertex1;

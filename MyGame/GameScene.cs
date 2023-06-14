@@ -13,7 +13,7 @@ namespace MyGame
             //4x4 matrix created for projection, Mat4x4 is a class with a 2d list which acts as the 4x4 matrix
             Mat4x4 matproj = new Mat4x4();
             //fnear is the distance from the players head to the camera
-            float fNear = 0.1f; 
+            float fNear = 0.1f;
 
             //ffar is the distance from the players head to the end of the view
             float fFar = 1000.0f;
@@ -30,7 +30,7 @@ namespace MyGame
             matproj.m4x4[3][2]=(-fFar * fNear) /(fFar - fNear);//3,2 = -0.10001000100010001000100010001
             matproj.m4x4[2][3]= 1.0f;//2,3 = 1
             matproj.m4x4[3][3]= 0.0f;//3,3 = 0
-            
+
             //Triangles for 3d graphical rendering
             //triangles are just 3 vector3f's to allow 3 points in 3d space
             Mesh meshcube = new Mesh(matproj);
@@ -68,12 +68,12 @@ namespace MyGame
             AddGameObject(meshcube);
             //the game object is added to start updating it's condition
             //this allows it to draw and for modifications to be made to it
-            
+
             //pyramid mesh
 
             Mesh meshPyramid = new Mesh(matproj);
             //bottom
-            Triangle ptriangle1 = new Triangle(new Vector3f(1,0,1),new Vector3f(0,0,1), new Vector3f(0,0,0));
+            Triangle ptriangle1 = new Triangle(new Vector3f(1, 0, 1), new Vector3f(0, 0, 1), new Vector3f(0, 0, 0));
             Triangle ptriangle2 = new Triangle(new Vector3f(1, 0, 1), new Vector3f(0, 0, 0), new Vector3f(1, 0, 0));
             //south face
             Triangle ptriangle3 = new Triangle(new Vector3f(0.5f, 1f, 0.5f), new Vector3f(0, 0, 0), new Vector3f(1, 0, 0));
@@ -96,7 +96,7 @@ namespace MyGame
             Mesh RandomShape = new Mesh(matproj);
             for (int i = 0; i<rng.Next(20)+1; i++)
             {
-                Triangle randomtriangle = new Triangle(new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()),new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()), new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()));
+                Triangle randomtriangle = new Triangle(new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()), new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()), new Vector3f((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble()));
                 RandomShape.AddTriangle(randomtriangle);
             }
             //loop is for a random amount of triangles between 1 and 20

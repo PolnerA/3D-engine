@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using GameEngine;
+﻿using GameEngine;
 using SFML.System;
 using SFML.Window;
+using System;
+using System.Collections.Generic;
 
 namespace MyGame
 {
-    class Mesh:GameObject
+    class Mesh : GameObject
     {
-        float fTheta=1.0f;
+        float fTheta = 1.0f;
         //theta is starting at 1, goes up and changes the rotation matrices
         Random rng = new Random();
         //random number generation is set up to generate random shapes
-        List<Triangle> triangles= new List<Triangle>();
+        List<Triangle> triangles = new List<Triangle>();
         Mat4x4 matProj = new Mat4x4();
         //mesh contains triangles and matproj is carried over
         //when mesh is created it uses the projection matrix from GameScene
         public Mesh(Mat4x4 matproj)
         {
-            this.matProj = matproj;
+            matProj = matproj;
         }
         //adds triangles to the mesh
         public void AddTriangle(Triangle triangle)
@@ -27,12 +27,12 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-            Mat4x4 matRotZ= new Mat4x4();
-            Mat4x4 matRotX= new Mat4x4();
+            Mat4x4 matRotZ = new Mat4x4();
+            Mat4x4 matRotX = new Mat4x4();
             //rotation matrices are set up
             //theta is increased
             fTheta += 1.0f * elapsed.AsSeconds();
-            
+
             // Rotation Z matrix set up
             matRotZ.m4x4[0][0]=(float)Math.Cos(fTheta);
             matRotZ.m4x4[0][1] =(float)Math.Sin(fTheta);
@@ -40,7 +40,7 @@ namespace MyGame
             matRotZ.m4x4[1][1] =(float)Math.Cos(fTheta);
             matRotZ.m4x4[2][2] = 1;
             matRotZ.m4x4[3][3] = 1;
-            
+
             // Rotation X matrix set up
             matRotX.m4x4[0][0] = 1;
             matRotX.m4x4[1][1] =(float)Math.Cos(fTheta * 0.5f);
@@ -49,9 +49,9 @@ namespace MyGame
             matRotX.m4x4[2][2] =(float)Math.Cos(fTheta * 0.5f);
             matRotX.m4x4[3][3] = 1;
 
-            for (int i=0; i<triangles.Count;i++)//goes through each triangle in the mesh
+            for (int i = 0; i<triangles.Count; i++)//goes through each triangle in the mesh
             {
-                Triangle triProjected = new Triangle(); Triangle triTranslated; Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX= new Triangle();
+                Triangle triProjected = new Triangle(); Triangle triTranslated; Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX = new Triangle();
 
                 // Rotate in Z-Axis
                 triRotatedZ.a = matRotZ.MultiplyMatrixVector(triangles[i].a);
@@ -62,18 +62,18 @@ namespace MyGame
                 triRotatedZX.a = matRotX.MultiplyMatrixVector(triRotatedZ.a);
                 triRotatedZX.b = matRotX.MultiplyMatrixVector(triRotatedZ.b);//matrix multiplication again trirotatedz is changed to trirotated zx
                 triRotatedZX.c = matRotX.MultiplyMatrixVector(triRotatedZ.c);
-                
+
                 // Offset into the screen (so you aren't in the mesh)
                 triTranslated = triRotatedZX;
                 triTranslated.a.Z = triRotatedZX.a.Z + 3.0f;
                 triTranslated.b.Z = triRotatedZX.b.Z + 3.0f;
                 triTranslated.c.Z = triRotatedZX.c.Z + 3.0f;
-                
+
                 // Project triangles from 3D --> 2D
                 triProjected.a = matProj.MultiplyMatrixVector(triTranslated.a);
                 triProjected.b = matProj.MultiplyMatrixVector(triTranslated.b);
                 triProjected.c = matProj.MultiplyMatrixVector(triTranslated.c);
-                
+
                 // Scale into view
                 triProjected.a.X += 1.0f; triProjected.a.Y += 1.0f;//x and y are set to 1 and then multiplied by half the renderwindow size to center them
                 triProjected.b.X += 1.0f; triProjected.b.Y += 1.0f;

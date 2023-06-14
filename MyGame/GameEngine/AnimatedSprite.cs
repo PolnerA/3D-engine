@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
+using System.Collections.Generic;
 
 namespace GameEngine
 {
@@ -92,7 +92,7 @@ namespace GameEngine
         // Sets the spritesheet texture we will use for animation frames.
         public Texture Texture
         {
-            get { return _sprite.Texture;  }
+            get { return _sprite.Texture; }
             set { _sprite.Texture = value; }
         }
 
