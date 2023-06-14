@@ -1,6 +1,6 @@
 # 3D Game demo with the Williams Game Engine
 
-This repository is a transformation of the Williams Game engine from a simple 2d based game engine to one which has 3d graphics, 
+This repository is a transformation of the Williams Game engine from a 2d based game engine to one which has simple 3d graphics, 
 this is done with multiple matrices the main one matproj is used to change the vectors of 3 points to 2d coordinates, 
 it can be used to create functional 3d graphics using SFML and the majority of the code left from the Williams Game Engine.
 
