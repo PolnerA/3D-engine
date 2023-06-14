@@ -1,11 +1,6 @@
 ﻿using GameEngine;
-using SFML.Audio;
 using SFML.System;
-using SFML.Window;
 using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Threading;
 
 namespace MyGame
 {

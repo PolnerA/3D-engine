@@ -82,7 +82,6 @@ namespace GameEngine
                 }
             }
         }
-
         private void UpdateGameObjects(Time time)
         {//updates each game object in _gameobjects
             for (int i = 0; i < _gameObjects.Count; i++) { _gameObjects[i].Update(time); }
