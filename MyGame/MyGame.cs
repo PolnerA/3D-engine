@@ -4,7 +4,6 @@ namespace MyGame
 {
     static class MyGame
     {
-        //does what we want it to 100%
         //window width and height for fullscreen
         private const int WindowWidth = 1920;
         private const int WindowHeight = 1080;

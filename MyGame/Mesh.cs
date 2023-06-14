@@ -14,51 +14,61 @@ namespace MyGame
     class Mesh:GameObject
     {
         float fTheta=1.0f;
+        //theta is starting at 1, goes up and changes the rotation matrices
         Random rng = new Random();
+        //random number generation is set up to generate random shapes
         List<Triangle> triangles= new List<Triangle>();
         Mat4x4 matProj = new Mat4x4();
+        //mesh contains triangles and matproj is carried over
+        //when mesh is created it uses the projection matrix from GameScene
         public Mesh(Mat4x4 matproj)
         {
             this.matProj = matproj;
         }
+        //adds triangles to the mesh
         public void AddTriangle(Triangle triangle)
         {
             triangles.Add(triangle);
-
         }
         public override void Update(Time elapsed)
         {
             Mat4x4 matRotZ= new Mat4x4();
             Mat4x4 matRotX= new Mat4x4();
+            //rotation matrices are set up
+            //theta is increased
             fTheta += 1.0f * elapsed.AsSeconds();
-            // Rotation Z
+            
+            // Rotation Z matrix set up
             matRotZ.m4x4[0][0]=(float)Math.Cos(fTheta);
             matRotZ.m4x4[0][1] =(float)Math.Sin(fTheta);
             matRotZ.m4x4[1][0] =(float)-Math.Sin(fTheta);
             matRotZ.m4x4[1][1] =(float)Math.Cos(fTheta);
             matRotZ.m4x4[2][2] = 1;
             matRotZ.m4x4[3][3] = 1;
-            // Rotation X
+            
+            // Rotation X matrix set up
             matRotX.m4x4[0][0] = 1;
             matRotX.m4x4[1][1] =(float)Math.Cos(fTheta * 0.5f);
             matRotX.m4x4[1][2] =(float)Math.Sin(fTheta * 0.5f);
             matRotX.m4x4[2][1] =(float)-Math.Sin(fTheta * 0.5f);
             matRotX.m4x4[2][2] =(float)Math.Cos(fTheta * 0.5f);
             matRotX.m4x4[3][3] = 1;
-            for (int i=0; i<triangles.Count;i++)
+
+            for (int i=0; i<triangles.Count;i++)//goes through each triangle in the mesh
             {
                 Triangle triProjected = new Triangle(); Triangle triTranslated; Triangle triRotatedZ = new Triangle(); Triangle triRotatedZX= new Triangle();
 
                 // Rotate in Z-Axis
                 triRotatedZ.a = matRotZ.MultiplyMatrixVector(triangles[i].a);
-                triRotatedZ.b = matRotZ.MultiplyMatrixVector(triangles[i].b);//matrix multiplication for rotation leaves 0 values
+                triRotatedZ.b = matRotZ.MultiplyMatrixVector(triangles[i].b);//matrix multiplication for rotation with the triangle as the input new trirotated z for the output
                 triRotatedZ.c = matRotZ.MultiplyMatrixVector(triangles[i].c);
-                //output for mat rot z isn't recorded, keeps the input 0 for the second.
+
                 // Rotate in X-Axis
                 triRotatedZX.a = matRotX.MultiplyMatrixVector(triRotatedZ.a);
-                triRotatedZX.b = matRotX.MultiplyMatrixVector(triRotatedZ.b);
+                triRotatedZX.b = matRotX.MultiplyMatrixVector(triRotatedZ.b);//matrix multiplication again trirotatedz is changed to trirotated zx
                 triRotatedZX.c = matRotX.MultiplyMatrixVector(triRotatedZ.c);
-                // Offset into the screen
+                
+                // Offset into the screen (so you aren't in the mesh)
                 triTranslated = triRotatedZX;
                 triTranslated.a.Z = triRotatedZX.a.Z + 3.0f;
                 triTranslated.b.Z = triRotatedZX.b.Z + 3.0f;
@@ -70,7 +80,7 @@ namespace MyGame
                 triProjected.c = matProj.MultiplyMatrixVector(triTranslated.c);
                 
                 // Scale into view
-                triProjected.a.X += 1.0f; triProjected.a.Y += 1.0f;
+                triProjected.a.X += 1.0f; triProjected.a.Y += 1.0f;//x and y are set to 1 and then multiplied by half the renderwindow size to center them
                 triProjected.b.X += 1.0f; triProjected.b.Y += 1.0f;
                 triProjected.c.X += 1.0f; triProjected.c.Y += 1.0f;
                 triProjected.a.X *= 0.5f * Game.RenderWindow.Size.X;
@@ -80,11 +90,10 @@ namespace MyGame
                 triProjected.c.X *= 0.5f * Game.RenderWindow.Size.X;
                 triProjected.c.Y *= 0.5f * Game.RenderWindow.Size.Y;
 
-                // Rasterize triangle
+                //draws the triangle
                 Game.CurrentScene.DrawTriangle((int)triProjected.a.X, (int)triProjected.a.Y, (int)triProjected.b.X, (int)triProjected.b.Y, (int)triProjected.c.X, (int)triProjected.c.Y);
-                //only one point scaled into view
             }
-            //when enter is pressed it creates random triangles
+            //when enter is pressed it creates random triangles same as in gamescene
             if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
                 triangles.Clear();
@@ -94,7 +103,7 @@ namespace MyGame
                     AddTriangle(randomtriangle);
                 }
             }
-            //right shift makes it a cube
+            //right shift makes it a cube just like in GameScene
             if (Keyboard.IsKeyPressed(Keyboard.Key.RShift))
             {
                 triangles.Clear();
@@ -129,7 +138,7 @@ namespace MyGame
                 AddTriangle(triangle11);
                 AddTriangle(triangle12);
             }
-            //up turns it into a pyramid
+            //up turns it into a pyramid Just like in gamescene
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
             {
                 triangles.Clear();
@@ -150,6 +159,7 @@ namespace MyGame
                 AddTriangle(ptriangle5);
                 AddTriangle(ptriangle6);
             }
+            //closes the renderwindow if escape is pressed (easy exiting for fullscreen aplications)
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 Game.RenderWindow.Close();

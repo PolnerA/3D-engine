@@ -18,18 +18,18 @@ namespace GameEngine
     // The Scene manages all the GameObjects currently in the game.
     class Scene
     {
-        // These lists hold various game objects -AP
+        // These lists hold various game objects 
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
 
         // Puts a GameObject into the scene.
         public void AddGameObject(GameObject gameObject)
         {
-            // This adds the game object onto the back (the end) of the list of game objects.-AP
+            // This adds the game object onto the back (the end) of the list of game objects.
             _gameObjects.Add(gameObject);
         }
         public void AddGameObject(int position, GameObject gameObject)
         {
-            //This adds the game object at a location into the list of game objects. -AP
+            //This adds the game object at a location into the list of game objects. 
             _gameObjects.Insert(position, gameObject);
         }
 
@@ -39,7 +39,7 @@ namespace GameEngine
             // Clear the window.
             Game.RenderWindow.Clear();
             // Go through our normal sequence of game loop stuff.
-            
+            //doesnt't draw game objects as the mesh's draw themselves when updated.
             // Handle any keyboard, mouse events, etc. for our game window.
             Game.RenderWindow.DispatchEvents();
             HandleCollisions();
@@ -49,7 +49,7 @@ namespace GameEngine
             Game.RenderWindow.Display();
         }
         // This method lets game objects respond to collisions.
-        private void HandleCollisions()//handle collisions is only for _gameObjects and _cloud-AP
+        private void HandleCollisions()
         {
             for (int i = 0; i < _gameObjects.Count; i++)
             {
@@ -67,8 +67,6 @@ namespace GameEngine
                 for (int j = 0; j < _gameObjects.Count; j++)
                 {
                     var otherGameObject = _gameObjects[j];
-                    //Spell for this game is part of the clouds as it needs to be below UI and above game objects -AP
-                    //Only checks for collisions between _gameObjects and _cloud Lists - AP
 
                     // Don't check an object colliding with itself.
                     if (gameObject == otherGameObject) continue;
@@ -85,9 +83,8 @@ namespace GameEngine
             }
         }
 
-        // This function calls update on each of our game objects for most lists that need to be updated (currently all of them) -AP
         private void UpdateGameObjects(Time time)
-        {
+        {//updates each game object in _gameobjects
             for (int i = 0; i < _gameObjects.Count; i++) { _gameObjects[i].Update(time); }
         }
 
@@ -102,7 +99,7 @@ namespace GameEngine
             //first vertex position is at point 1
 
             vertex1.Color = Color.Red;
-            //the color of the vertex is white
+            //the color of the vertex is red
             
             Vertex vertex2 = new Vertex();
             //second vertex
@@ -111,7 +108,7 @@ namespace GameEngine
             //vertex is set to the second point
             
             vertex2.Color = Color.Red;
-            //vertex's color is white
+            //vertex's color is red
             
             Vertex vertex3 = new Vertex();
             //3rd vertex
@@ -120,7 +117,7 @@ namespace GameEngine
             //vertex position is set to the 3rd point
             
             vertex3.Color = Color.Red;
-            //vertex color is white
+            //vertex color is red
             
             //draw line between x1 y1 x2 y2
             VertexArray lines1 = new VertexArray((PrimitiveType)2, 2);//creates a vertex array with two vertices, type line.
