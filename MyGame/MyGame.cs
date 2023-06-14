@@ -8,7 +8,7 @@ namespace MyGame
         private const int WindowWidth = 1920;
         private const int WindowHeight = 1080;
 
-        private const string WindowTitle = "Explore";
+        private const string WindowTitle = "Spinning 3D Shapes";
 
         private static void Main(string[] args)
         {
