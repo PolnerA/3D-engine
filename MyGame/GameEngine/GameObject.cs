@@ -10,7 +10,7 @@ namespace GameEngine
         private bool _isCollisionCheckEnabled;
 
         private bool _isDead;
-        //position to store the game objects various positions for rendering -AP
+        //position to store the game objects various positions for rendering
         private Vector2f Position;
 
         // Using a set prevents duplicates.
@@ -21,12 +21,6 @@ namespace GameEngine
         public void AssignTag(string tag)
         {
             _tags.Add(tag);
-        }
-        // SetPosition allows for the GameObject to see the sprite positions (useful for rendering and other things) - AP
-        public void SetPosition(Vector2f position) { Position = position; }
-        public Vector2f GetPosition()//allows the scene to get the game object positions for the render window -AP
-        {
-            return Position;
         }
         public bool HasTag(string tag)
         {
