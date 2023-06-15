@@ -7,9 +7,9 @@ namespace MyGame
     {
 
         public List<List<float>> m4x4 = new List<List<float>>() { new List<float> { 0,0,0,0},
-                                                           new List<float> { 0,0,0,0},
-                                                           new List<float> { 0,0,0,0},
-                                                           new List<float> { 0,0,0,0} };
+                                                                  new List<float> { 0,0,0,0},
+                                                                  new List<float> { 0,0,0,0},
+                                                                  new List<float> { 0,0,0,0} };
         //on creation of a 4x4 matrix it creates a 2d list of float values that are initialy 0
         //4x4 matrix instead of 3x3 to be able to divide all the values by w 
         public Vector3f MultiplyMatrixVector(Vector3f input)
