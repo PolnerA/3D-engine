@@ -10,8 +10,6 @@ namespace GameEngine
         private bool _isCollisionCheckEnabled;
 
         private bool _isDead;
-        //position to store the game objects various positions for rendering
-        private Vector2f Position;
 
         // Using a set prevents duplicates.
         private readonly HashSet<string> _tags = new HashSet<string>();
